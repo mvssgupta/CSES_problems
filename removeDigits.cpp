@@ -2,7 +2,6 @@
 using namespace std;
 #define debug(x) cout << #x << " " << x << endl;
 int n;
-int arr[1000001];
 int dp[1000001];
 int rec(int i)
 {
