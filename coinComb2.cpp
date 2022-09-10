@@ -1,9 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define debug(x) cout << #x << " " << x << endl;
-int dp[101][101];
+#define mod 1000000007
+int dp[1000001][101];
 int n, x;
 int v[101];
+
+//! giving TLE for large numbers , due to recursion stack overflow.
 int rec(int level, int prev)
 {
     // pruning
@@ -19,7 +22,7 @@ int rec(int level, int prev)
 
     // calculation
     // cout<<"Level "<<level<<" prev "<<prev<<endl;
-    dp[level][prev] = rec(level + v[prev], prev) + rec(level, prev + 1);
+    dp[level][prev] = (rec(level + v[prev], prev)%mod + rec(level, prev + 1)%mod)%mod;
 
     // return 
     return dp[level][prev];
@@ -33,6 +36,10 @@ int main()
     }
     sort(v, v + n);
     memset(dp, -1, sizeof(dp));
-    cout << rec(0, 0) << endl;
+    rec(0, 0);
+    cout<<dp[0][0];
     return 0;
 }
+
+
+
